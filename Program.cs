@@ -1,26 +1,42 @@
+using Microsoft.EntityFrameworkCore;
+using TaskManagement.Data;
+using TaskManagement.Interfaces;
+using TaskManagement.Repositories;
+using TaskManagement.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddRazorPages();
+
+//NOTE: Configure the DbContext with de connection string
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
+);
+
+//NOTE: Add repository to the container
+builder.Services.AddScoped<IPermissionRepository, PermissionRepository>();
+
+//NOTE: Add service to the container
+builder.Services.AddScoped<IPermissionService, PermissionService>();
+
+//NOTE: Add Controllers to the container
+builder.Services.AddControllers();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
-
-app.UseHttpsRedirection();
+//NOTE: THis is for HandleErrors
+app.UseMiddleware<TaskManagement.Middleware.ExceptionHandle>();
 
 app.UseRouting();
+app.UseEndpoints(endpoints =>
+{
+    ControllerActionEndpointConventionBuilder controllerActionEndpointConventionBuilder = endpoints.MapControllers();
+});
 
-app.UseAuthorization();
-
-app.MapStaticAssets();
-app.MapRazorPages()
-   .WithStaticAssets();
+//NOTE: Remove this in production
+//Apply migrations at runtime (if necessary)
+using (var scope = app.Services.CreateScope()){
+    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    dbContext.Database.Migrate(); 
+}
 
 app.Run();
