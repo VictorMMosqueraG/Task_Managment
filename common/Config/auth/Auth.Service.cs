@@ -6,35 +6,55 @@ using TaskManagement.Entity;
 
 namespace TaskManagement.Services
 {
-    public class AuthService
+    public class AuthServiceJwt
     {
-        private readonly IConfiguration configuration;
+        private readonly IConfiguration _configuration;
 
-        public AuthService(IConfiguration _configuration)
+        private const string JwtKey = "JwtSettings:Key";
+        private const string JwtIssuer = "JwtSettings:Issuer";
+        private const string JwtAudience = "JwtSettings:Audience";
+
+        public AuthServiceJwt(IConfiguration configuration)
         {
-            configuration = _configuration;
+            _configuration = configuration;
         }
 
-       public string GenerateToken(User user, string role, List<string> permissions){
-    var claims = new List<Claim>
-    {
-        new Claim(ClaimTypes.Name, user.Email),
-        new Claim(ClaimTypes.Role, role)
-    };
+        public string GenerateToken(User user, string role, List<string> permissions)
+        {
+            var key = GetConfigurationValue(JwtKey);
+            var issuer = GetConfigurationValue(JwtIssuer);
+            var audience = GetConfigurationValue(JwtAudience);
 
-    claims.AddRange(permissions.Select(p => new Claim("Permission", p)));
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, user.Email),
+                new Claim(ClaimTypes.Role, role)
+            };
 
-    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSettings:Key"]));
-    var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            claims.AddRange(permissions.Select(p => new Claim("Permission", p)));
 
-    var token = new JwtSecurityToken(
-        issuer: configuration["JwtSettings:Issuer"],
-        audience: configuration["JwtSettings:Audience"],
-        claims: claims,
-        expires: DateTime.Now.AddMinutes(30),
-        signingCredentials: creds);
+            var keyBytes = Encoding.UTF8.GetBytes(key);
+            var securityKey = new SymmetricSecurityKey(keyBytes);
+            var creds = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
-    return new JwtSecurityTokenHandler().WriteToken(token);
-}
+            var token = new JwtSecurityToken(
+                issuer: issuer,
+                audience: audience,
+                claims: claims,
+                expires: DateTime.Now.AddMinutes(30),
+                signingCredentials: creds);
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        private string GetConfigurationValue(string key)
+        {
+            var value = _configuration[key];
+            if (string.IsNullOrEmpty(value))
+            {
+                throw new InvalidOperationException($"Configuration key '{key}' is not configured properly.");
+            }
+            return value;
+        }
     }
 }

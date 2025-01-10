@@ -23,7 +23,8 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IPermissionService, PermissionService>();
 builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<AuthServiceJwt>();
+builder.Services.AddScoped<IAuthService,AuthServices>();
 
 //NOTE: JWT Configuration
 builder.Services.AddAuthentication(options =>{
