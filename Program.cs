@@ -14,9 +14,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 //NOTE: Add repository to the container
 builder.Services.AddScoped<IPermissionRepository, PermissionRepository>();
+builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 
 //NOTE: Add service to the container
 builder.Services.AddScoped<IPermissionService, PermissionService>();
+builder.Services.AddScoped<IRoleService, RoleService>();
 
 //NOTE: Add Controllers to the container
 builder.Services.AddControllers();
