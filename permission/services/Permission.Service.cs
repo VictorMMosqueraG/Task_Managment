@@ -31,6 +31,7 @@ namespace TaskManagement.Services{
             return permission;
         }
 
+
         public async Task<List<Permission?>?> GetUserPermissions(int userId){
             return await repository.GetUserPermissions(userId);
         }   

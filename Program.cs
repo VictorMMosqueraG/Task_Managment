@@ -63,17 +63,21 @@ builder.Services.AddControllers();
 //NOTE: Add Authorization Policies
 builder.Services.AddAuthorization(options =>{
     options.AddPolicy("WriteAllPolicy", policy =>
-        policy.RequireClaim("Permission", "write.all"));
+        policy.RequireClaim("Permission", "write.all"));//NOTE:Create and update all modules
     options.AddPolicy("WritePolicy", policy =>
-        policy.RequireClaim("Permission", "write"));
+        policy.RequireClaim("Permission", "write"));// Create Only Task
     options.AddPolicy("ReadAllPolicy", policy =>
-        policy.RequireClaim("Permission", "read.all"));
+        policy.RequireClaim("Permission", "read.all"));// Read all modules
     options.AddPolicy("ReadPolicy", policy =>
-        policy.RequireClaim("Permission", "read"));
+        policy.RequireClaim("Permission", "read"));//Read only Task
     options.AddPolicy("UpdateAllPolicy", policy =>
-        policy.RequireClaim("Permission", "update.all"));
+        policy.RequireClaim("Permission", "update.all"));//Update all modules
+     options.AddPolicy("UpdatePolicy", policy =>
+        policy.RequireClaim("Permission", "update"));//UPdate only Task
     options.AddPolicy("DeleteAllPolicy", policy =>
-        policy.RequireClaim("Permission", "delete.all"));
+        policy.RequireClaim("Permission", "delete.all"));//Delete all Modules
+    options.AddPolicy("DeletePolicy", policy =>
+        policy.RequireClaim("Permission", "delete"));//Delete only Task
 });
 
 //NOTE: Build the application

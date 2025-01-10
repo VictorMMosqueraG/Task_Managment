@@ -42,6 +42,8 @@ namespace TaskManagement.Services{
             return role;
         }
         
+        //NOTE: Find a user in the database by their ID, including the relationship with their role  
+        
         public async Task<Role?> GetUserRole(int userId){
             var role = await repository.GetUserRole(userId);
             return role;
