@@ -15,6 +15,7 @@ namespace TaskManagement.Data
         public DbSet<Permission> Permissions { get; set; } = null!; 
         public DbSet<Role> Role {get;set;} = null!; 
         public DbSet<RolePermission> RolePermissions { get; set; } = null!;
+        public DbSet<User> User {get;set;} = null!;
 
        //NOTE: Apply configuration of the entities
         protected override void OnModelCreating(ModelBuilder modelBuilder){
@@ -28,6 +29,9 @@ namespace TaskManagement.Data
 
             //NOTE: Role_Permission
             modelBuilder.ApplyConfiguration(new RolePermissionConfiguration());
+
+            //NOTE: User
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
         }
     }   
 }

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using TaskManagement.DTOs;
 using TaskManagement.Entity;
 using TaskManagement.Interfaces;
@@ -25,6 +26,8 @@ namespace TaskManagement.Controllers{
                     status = 201,
                     message = "Entity was created Successfully." 
                 });            
+            }catch(DbUpdateException){
+                throw new AlreadyExistException("NAME");
             }
             catch (ArgumentException){
                 throw new UnexpectedErrorException();
