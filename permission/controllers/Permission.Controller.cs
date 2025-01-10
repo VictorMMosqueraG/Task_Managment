@@ -1,11 +1,12 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Npgsql;
 using TaskManagement.DTOs;
-using TaskManagement.Entity;
 using TaskManagement.Interfaces;
 
 namespace TaskManagement.Controllers{
+
+
 
     [Route("api/permission")]
     [ApiController]
@@ -17,6 +18,7 @@ namespace TaskManagement.Controllers{
         }
 
         //NOTE: Save Permission
+        [Authorize(Policy = "WriteAllPolicy")]
         [HttpPost]
         public async Task<IActionResult> CreatePermission([FromBody] CreatePermissionDto permission){
             try{

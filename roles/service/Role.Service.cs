@@ -41,5 +41,11 @@ namespace TaskManagement.Services{
 
             return role;
         }
+        
+        public async Task<Role?> GetUserRole(int userId){
+            var role = await repository.GetUserRole(userId);
+            return role;
+        }
+        
     }
 }

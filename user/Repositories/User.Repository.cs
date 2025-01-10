@@ -1,4 +1,5 @@
 
+using Microsoft.EntityFrameworkCore;
 using TaskManagement.Data;
 using TaskManagement.Entity;
 using TaskManagement.Interfaces;
@@ -17,6 +18,12 @@ namespace TaskManagement.Repositories{
             context.User.Add(user);
             await context.SaveChangesAsync();
             return user;
+        }
+
+        public async Task<User?> FindByEmail(string email){
+            return await context.User
+            .Include(u => u.role)
+            .FirstOrDefaultAsync(u => u.Email == email);
         }
     }
 }

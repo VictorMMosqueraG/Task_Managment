@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TaskManagement.DTOs;
@@ -17,6 +18,8 @@ namespace TaskManagement.Controllers{
             service = _service;
         }
 
+        //NOTE: Save Role
+        [Authorize(Policy = "WriteAllPolicy")]
         [HttpPost]
         public async Task<IActionResult> CreateRole([FromBody] CreateRoleDTO role){
             try{

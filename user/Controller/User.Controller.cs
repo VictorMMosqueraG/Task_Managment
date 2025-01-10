@@ -1,4 +1,5 @@
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TaskManagement.DTOs;
@@ -16,6 +17,8 @@ namespace TaskManagement.Controllers{
             service = _service;
         }
 
+        [AllowAnonymous]
+        [HttpPost("register")]
         public async Task<IActionResult> createUser([FromBody] CreateUserDto user){
             try{
                 var createUser = await service.createUser(user);
@@ -31,6 +34,26 @@ namespace TaskManagement.Controllers{
             catch (ArgumentException){
                 throw new UnexpectedErrorException();
             }
+        }
+
+        [AllowAnonymous]
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginDto loginDto){
+            try
+                {
+                    var token = await service.loginUser(loginDto.Email, loginDto.Password);
+
+                    return Ok(new{
+                        status = 200,
+                        message = "Auth successfully",
+                        token 
+                    });
+            }catch (UnauthorizedAccessException){
+                return Unauthorized(new{
+                    status = 401,
+                    message = "Credential invalid"
+                });
+            }   
         }
     }
 }

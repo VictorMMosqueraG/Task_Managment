@@ -28,5 +28,14 @@ namespace TaskManagement.Interfaces{
 
             return role;
         }
+
+        public async Task<Role?> GetUserRole(int userId){
+            var user = await context.User
+            .Include(u => u.role)
+            .FirstOrDefaultAsync(u => u.Id == userId);
+
+            return user?.role;
+        }
+
     }
 }
