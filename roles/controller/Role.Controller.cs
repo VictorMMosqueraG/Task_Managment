@@ -26,8 +26,8 @@ namespace TaskManagement.Controllers{
                     message = "Entity was created Successfully." 
                 });            
             }
-            catch (ArgumentException ex){
-                return BadRequest(new { error = ex.Message });
+            catch (ArgumentException){
+                throw new UnexpectedErrorException();
             }
         }
     }

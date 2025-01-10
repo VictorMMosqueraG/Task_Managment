@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Npgsql;
 using TaskManagement.Data;
 using TaskManagement.Entity;
 using TaskManagement.Interfaces;
@@ -14,9 +15,9 @@ namespace TaskManagement.Repositories{
 
         //NOTE: Save Permission
         public async Task<Permission> add(Permission permission){
-            context.Permissions.Add(permission);
-            await context.SaveChangesAsync();
-            return permission;
+                context.Permissions.Add(permission);
+                await context.SaveChangesAsync();
+                return permission;
         }
 
         //NOTE: FindByIdOrFail
@@ -25,7 +26,7 @@ namespace TaskManagement.Repositories{
                 .FirstOrDefaultAsync(p => p.Id == permissionId);
 
             if (permission == null){
-                throw new PermissionNotFoundException(permissionId);
+                throw new NotFoundException(permissionId,"PERMISSION");
             }
 
             return permission;

@@ -1,8 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Text.Json;
-using System.Text.RegularExpressions;
 
 namespace TaskManagement.Middleware
 {
@@ -19,54 +17,46 @@ namespace TaskManagement.Middleware
             try{
                 await _next(context);
             }
-            catch (DbUpdateException ex){
+            catch (AlreadyExistException ex){
                 await HandleAlreadyExistException(context,ex);
             }
-            catch (PermissionNotFoundException ex){
-                await HandlePermissionNotFoundException(context, ex);
+            catch (NotFoundException ex){
+                await HandleNotFoundException(context, ex);
             }
-            catch (Exception ex){
-                await HandleException(context, ex);
+            catch (UnexpectedErrorException ex){
+                await UnexpectedErrorException(context, ex);
             }
         }
 
         //NOTE: Unexpected error
-        private Task HandleException(HttpContext context, Exception ex){
+        private Task UnexpectedErrorException(HttpContext context, UnexpectedErrorException ex){
     
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError; // Code 500
 
             var errorResponse = new{
                 status = context.Response.StatusCode,
-                message = "An unexpected error occurred. Please try again later."
+                message = ex.Message
             };
 
             return context.Response.WriteAsync(JsonSerializer.Serialize(errorResponse));
         }
-
+    
         //NOTE: AlreadyExist Data
-        private Task HandleAlreadyExistException(HttpContext context, DbUpdateException ex){
+        private Task HandleAlreadyExistException(HttpContext context, AlreadyExistException ex){
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)HttpStatusCode.BadRequest; // Code 400
 
-            var innerMessage = ex.InnerException?.Message;
             var errorResponse = new{
                 status = context.Response.StatusCode,
-                message = "A database error occurred. Please check the provided data." //Default message
+                message = ex.Message
             };
-
-            if (!string.IsNullOrEmpty(innerMessage) && innerMessage.Contains("duplicate key value violates unique constraint")){
-                var fieldName = GetFieldNameByConstraint(innerMessage);
-                errorResponse = new{
-                    status = context.Response.StatusCode,
-                    message = fieldName != null ? $"Value for '{fieldName}' already exists." : "A unique constraint violation occurred."
-                };
-            }
 
             return context.Response.WriteAsync(JsonSerializer.Serialize(errorResponse));
         }
 
-        private Task HandlePermissionNotFoundException(HttpContext context, PermissionNotFoundException ex){
+        //NOTE: NOT FOUND EXCEPTION
+        private Task HandleNotFoundException(HttpContext context, NotFoundException ex){
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = 404; 
 
@@ -78,17 +68,7 @@ namespace TaskManagement.Middleware
             return context.Response.WriteAsync(JsonSerializer.Serialize(errorResponse));
         }
 
-        //NOTE: method for extract constraint from db
-        private string? GetFieldNameByConstraint(string errorMessage){
-            if (
-                errorMessage.Contains("IX_Permission_Name") || 
-                errorMessage.Contains("IX_ROLE_NAME")
-            ){
-                return "Name"; 
-            }
-
-            return null; 
-        }
+       
 
     }
 }

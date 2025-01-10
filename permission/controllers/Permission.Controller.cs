@@ -1,4 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Npgsql;
+using TaskManagement.DTOs;
 using TaskManagement.Entity;
 using TaskManagement.Interfaces;
 
@@ -15,14 +18,21 @@ namespace TaskManagement.Controllers{
 
         //NOTE: Save Permission
         [HttpPost]
-        public async Task<IActionResult> CreatePermission([FromBody] Permission permission){
+        public async Task<IActionResult> CreatePermission([FromBody] CreatePermissionDto permission){
             try{
                 var createdPermission = await _service.createPermission(permission);
-                return CreatedAtAction(nameof(CreatePermission), new { id = createdPermission.Id }, createdPermission);
+                
+                return StatusCode(201, new {
+                    status = 201,
+                    message = "Entity was created Successfully." 
+                }); 
+            }catch(DbUpdateException){
+                throw new AlreadyExistException("NAME");
             }
-            catch (ArgumentException ex){
-                return BadRequest(new { error = ex.Message });
+            catch (ArgumentException){
+                throw new UnexpectedErrorException();
             }
         }
     }
+    
 }
