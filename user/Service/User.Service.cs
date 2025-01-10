@@ -1,6 +1,7 @@
 using TaskManagement.DTOs;
 using TaskManagement.Entity;
 using TaskManagement.Interfaces;
+using BCrypt.Net;
 
 namespace TaskManagement.Services{
 
@@ -18,11 +19,13 @@ namespace TaskManagement.Services{
             //Valid if the role if provide is valid or not
             var role = await roleService.findByIdOrFail(dto.role);
 
+            // Encrypt the password
+            var hashedPassword = BCrypt.Net.BCrypt.HashPassword(dto.password);
             //Mapping data
             var user = new User{
                 Name = dto.name,
                 Email = dto.email,
-                Password = dto.password,
+                Password = hashedPassword,
                 role = role
             };
 
