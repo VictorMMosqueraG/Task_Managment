@@ -15,5 +15,13 @@ namespace TaskManagement.Services{
         public async Task<Permission> createPermission(Permission permission){
             return await repository.add(permission);
         }
+
+
+        //NOTE: FindById if not exist throw Exception
+        public async Task<Permission?> findByIdOrFail(int permissionId){
+            var permission = await repository.findByIdOrFail(permissionId);
+
+            return permission;
+        }
     }
 }

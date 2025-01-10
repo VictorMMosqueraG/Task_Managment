@@ -4,5 +4,6 @@ namespace TaskManagement.Interfaces{
     
     public interface IPermissionService{
         Task<Permission> createPermission(Permission permission);
+        Task<Permission?> findByIdOrFail(int permissionId);
     }
 }

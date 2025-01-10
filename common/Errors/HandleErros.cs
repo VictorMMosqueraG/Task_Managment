@@ -22,7 +22,9 @@ namespace TaskManagement.Middleware
             catch (DbUpdateException ex){
                 await HandleAlreadyExistException(context,ex);
             }
-            
+            catch (PermissionNotFoundException ex){
+                await HandlePermissionNotFoundException(context, ex);
+            }
             catch (Exception ex){
                 await HandleException(context, ex);
             }
@@ -64,9 +66,24 @@ namespace TaskManagement.Middleware
             return context.Response.WriteAsync(JsonSerializer.Serialize(errorResponse));
         }
 
+        private Task HandlePermissionNotFoundException(HttpContext context, PermissionNotFoundException ex){
+            context.Response.ContentType = "application/json";
+            context.Response.StatusCode = 404; 
+
+            var errorResponse = new{
+                status = context.Response.StatusCode,
+                message = ex.Message 
+            };
+
+            return context.Response.WriteAsync(JsonSerializer.Serialize(errorResponse));
+        }
+
         //NOTE: method for extract constraint from db
         private string? GetFieldNameByConstraint(string errorMessage){
-            if (errorMessage.Contains("IX_Permission_Name")){
+            if (
+                errorMessage.Contains("IX_Permission_Name") || 
+                errorMessage.Contains("IX_ROLE_NAME")
+            ){
                 return "Name"; 
             }
 
