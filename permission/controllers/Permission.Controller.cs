@@ -32,7 +32,7 @@ namespace TaskManagement.Controllers{
                 throw new AlreadyExistException("NAME");
             }
             catch (ArgumentException){
-                throw new UnexpectedErrorException();
+                throw new UnexpectedErrorException("Unexpected Error");
             }
         }
     }

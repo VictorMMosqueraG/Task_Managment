@@ -42,20 +42,18 @@ namespace TaskManagement.Services{
             return await repository.add(user);
         }
 
-        public async Task<string> loginUser(string email, string password)
-        {
+        public async Task<string> loginUser(string email, string password){
             if (string.IsNullOrEmpty(email)) throw new ArgumentNullException(nameof(email));
             if (string.IsNullOrEmpty(password)) throw new ArgumentNullException(nameof(password));
 
             var user = await repository.FindByEmail(email);
-            if (user == null || !BCrypt.Net.BCrypt.Verify(password, user.Password))
-            {
-                throw new UnauthorizedAccessException("Credential Invalid."); // COMEBACK: Handle Error
+            if (user == null || !BCrypt.Net.BCrypt.Verify(password, user.Password)){
+                throw new UnauthorizedException("Credential Invalid."); 
             }
 
             var role = await roleService.GetUserRole(user.Id);
             if (role == null) throw new InvalidOperationException("Role not found.");
-
+            
             var permissions = await permissionService.GetUserPermissions(user.Id);
             if (permissions == null) throw new InvalidOperationException("Permissions not found.");
 

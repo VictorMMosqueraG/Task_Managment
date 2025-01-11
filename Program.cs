@@ -36,14 +36,14 @@ builder.Services.AddAuthentication(options =>{
     
     var key = jwtSettings["Key"];
     if (string.IsNullOrEmpty(key)){
-        throw new InvalidOperationException("JWT key is not configured properly."); //COMEBACK: Handle Error 
+        throw new UnexpectedErrorException("JWT key is not configured properly.");  
     }
-
+    
     var issuer = jwtSettings["Issuer"];
     var audience = jwtSettings["Audience"];
 
     if (string.IsNullOrEmpty(issuer) || string.IsNullOrEmpty(audience)){
-        throw new InvalidOperationException("JWT issuer or audience is not configured properly."); //COMEBACK: Handle Error
+        throw new UnexpectedErrorException("JWT issuer or audience is not configured properly."); 
     }
 
     options.TokenValidationParameters = new TokenValidationParameters{

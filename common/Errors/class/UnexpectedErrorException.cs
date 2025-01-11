@@ -1,5 +1,5 @@
 public class UnexpectedErrorException: Exception{
 
-    public UnexpectedErrorException()
-        :base("Unexpected Error") {}
+    public UnexpectedErrorException(string message)
+        :base(message) {}
 }
