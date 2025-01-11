@@ -1,4 +1,5 @@
 using TaskManagement.DTOs;
+using TaskManagement.Entity;
 using TaskManagement.Interfaces;
 
 namespace TaskManagement.Services{
@@ -41,6 +42,11 @@ namespace TaskManagement.Services{
             return  pagedUsers.Cast<object>().ToList();  
         }
 
+        public async Task<User?> findByIdOrFail(int userId){
+            var user = await userRepository.findByIdOrFail(userId);
+
+            return user;
+        }
     }
 
 }

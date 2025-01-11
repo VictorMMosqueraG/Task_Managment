@@ -33,5 +33,17 @@ namespace TaskManagement.Repositories{
 
             return users;
         }
+
+        public async Task<User?> findByIdOrFail(int userId){
+            var user = await context.User
+                .Include(u => u.role)
+                .FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (user == null){
+                throw new NotFoundException(userId,"USER");
+            }
+
+            return user;
+        }
     }
 }
