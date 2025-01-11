@@ -25,5 +25,13 @@ namespace TaskManagement.Repositories{
             .Include(u => u.role)
             .FirstOrDefaultAsync(u => u.Email == email);
         }
+
+        public async Task<List<User>> findAll(){
+             var users = await context.User
+                    .Include(u => u.role) // Include related role
+                    .ToListAsync();
+
+            return users;
+        }
     }
 }
