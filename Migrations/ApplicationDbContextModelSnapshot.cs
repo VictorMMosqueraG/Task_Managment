@@ -88,6 +88,44 @@ namespace task_managment.Migrations
                     b.ToTable("RolePermission", (string)null);
                 });
 
+            modelBuilder.Entity("TaskManagement.Entity.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasAnnotation("Relational:Validation", "email");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("character varying(40)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<int>("roleId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique()
+                        .HasDatabaseName("IX_Email");
+
+                    b.HasIndex("roleId");
+
+                    b.ToTable("User", (string)null);
+                });
+
             modelBuilder.Entity("TaskManagement.Entity.RolePermission", b =>
                 {
                     b.HasOne("TaskManagement.Entity.Permission", "Permission")
@@ -97,7 +135,7 @@ namespace task_managment.Migrations
                         .IsRequired();
 
                     b.HasOne("TaskManagement.Entity.Role", "Role")
-                        .WithMany("RolePermissions")
+                        .WithMany("Permissions")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -107,9 +145,20 @@ namespace task_managment.Migrations
                     b.Navigation("Role");
                 });
 
+            modelBuilder.Entity("TaskManagement.Entity.User", b =>
+                {
+                    b.HasOne("TaskManagement.Entity.Role", "role")
+                        .WithMany()
+                        .HasForeignKey("roleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("role");
+                });
+
             modelBuilder.Entity("TaskManagement.Entity.Role", b =>
                 {
-                    b.Navigation("RolePermissions");
+                    b.Navigation("Permissions");
                 });
 #pragma warning restore 612, 618
         }

@@ -26,6 +26,9 @@ namespace TaskManagement.Middleware
             catch (UnexpectedErrorException ex){
                 await UnexpectedErrorException(context, ex);
             }
+            catch(UnauthorizedException ex){
+                await HandleUnauthorizedException(context, ex);
+            }
         }
 
         //NOTE: Unexpected error
@@ -68,7 +71,17 @@ namespace TaskManagement.Middleware
             return context.Response.WriteAsync(JsonSerializer.Serialize(errorResponse));
         }
 
-       
+       private Task HandleUnauthorizedException(HttpContext context, UnauthorizedException ex){
+            context.Response.ContentType = "application/json";
+            context.Response.StatusCode = 401; 
+
+            var errorResponse = new{
+                status = context.Response.StatusCode,
+                message = ex.Message 
+            };
+
+            return context.Response.WriteAsync(JsonSerializer.Serialize(errorResponse));
+        }
 
     }
 }

@@ -31,5 +31,16 @@ namespace TaskManagement.Repositories{
 
             return permission;
         }
+
+        //NOTE: Method to get the list of permissions for a specific user by their user ID
+        public async Task<List<Permission?>?> GetUserPermissions(int userId){
+            var user = await context.User
+                .Include(u => u.role)
+                .ThenInclude(r => r.Permissions)
+                .ThenInclude(rp => rp.Permission)
+                .FirstOrDefaultAsync(u => u.Id == userId);
+
+            return user?.role.Permissions.Select(rp => rp.Permission).ToList();
+        }
     }
 }

@@ -16,6 +16,6 @@ namespace TaskManagement.Entity{
         public string? Description { get; set; }
         
         //Relationship many to many with permission
-        public ICollection<RolePermission> Permissions { get; set; } = new List<RolePermission>();
+        public required ICollection<RolePermission> Permissions { get; set; } = new List<RolePermission>();
     }
 }

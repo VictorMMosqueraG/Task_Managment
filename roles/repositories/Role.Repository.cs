@@ -16,5 +16,27 @@ namespace TaskManagement.Interfaces{
             await context.SaveChangesAsync();
             return role;
         }
+
+        //NOTE: FIndByIdOrFail
+        public async Task<Role> finByIdOrFail(int roleId){
+            var role = await context.Role
+                .FirstOrDefaultAsync(r => r.Id == roleId);
+
+            if(role == null){
+                throw new NotFoundException(roleId,"ROLE");
+            }
+
+            return role;
+        }
+
+        //NOTE: Find a user in the database by their ID, including the relationship with their role  
+        public async Task<Role?> GetUserRole(int userId){
+            var user = await context.User
+            .Include(u => u.role)
+            .FirstOrDefaultAsync(u => u.Id == userId);
+
+            return user?.role;
+        }
+
     }
 }

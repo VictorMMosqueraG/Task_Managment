@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using TaskManagement.DTOs;
 using TaskManagement.Entity;
 using TaskManagement.Interfaces;
@@ -16,6 +18,8 @@ namespace TaskManagement.Controllers{
             service = _service;
         }
 
+        //NOTE: Save Role
+        [Authorize(Policy = "WriteAllPolicy")]
         [HttpPost]
         public async Task<IActionResult> CreateRole([FromBody] CreateRoleDTO role){
             try{
@@ -25,9 +29,11 @@ namespace TaskManagement.Controllers{
                     status = 201,
                     message = "Entity was created Successfully." 
                 });            
+            }catch(DbUpdateException){
+                throw new AlreadyExistException("NAME");
             }
             catch (ArgumentException){
-                throw new UnexpectedErrorException();
+                throw new UnexpectedErrorException("Unexpected Error");
             }
         }
     }
