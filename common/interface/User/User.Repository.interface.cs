@@ -5,5 +5,6 @@ namespace TaskManagement.Interfaces{
     public interface IUserRepository{
         Task<User> add(User user);
         Task<User?> FindByEmail(string email);
+        Task<List<User>> findAll();
     }
 }

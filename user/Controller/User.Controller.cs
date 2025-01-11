@@ -16,5 +16,16 @@ namespace TaskManagement.Controllers{
         public UserController(IUserService _service){
             service = _service;
         }
+
+        [Authorize(Policy = "ReadAllPolicy")]
+        [HttpGet]
+        public async Task<IActionResult> finAllUser([FromQuery] PaginationUserDto paginationUserDto){
+            var users = await service.findAll(paginationUserDto);
+
+            return StatusCode(200, new {
+                    status = 200,
+                    data = users 
+            });
+        }
     }
 }
