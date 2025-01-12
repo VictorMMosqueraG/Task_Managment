@@ -34,6 +34,16 @@
             <response code="400">Nombre ya registrado en la db.</response>
              /// <response code="401">No autorizado. Se requiere un token válido.</response>
         </member>
+        <member name="M:TaskManagement.Controllers.RoleController.CreateRole(TaskManagement.DTOs.CreateRoleDTO)">
+            <summary>
+            Crea un nuevo rol en el sistema.
+            </summary>
+            <param name="role">Objeto con la información del rol a crear.</param>
+            <returns>Un código de estado 201 si el rol se creó exitosamente.</returns>
+            <response code="201">Rol creado exitosamente.</response>
+            <response code="400">EL role ya existe o el id del permiso no se encontro.</response>
+            <response code="401">No autorizado. Se requiere un token válido.</response>
+        </member>
         <member name="T:task_managment.Migrations.InitialCreate">
             <inheritdoc />
         </member>
