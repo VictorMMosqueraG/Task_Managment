@@ -80,6 +80,30 @@ builder.Services.AddAuthorization(options =>{
         policy.RequireClaim("Permission", "delete.all"));//Delete all Modules
     options.AddPolicy("DeletePolicy", policy =>
         policy.RequireClaim("Permission", "delete"));//Delete only Task
+
+        options.AddPolicy("WriteOrWriteAllPolicy", policy =>
+        policy.RequireAssertion(context =>
+            context.User.HasClaim(c => c.Type == "Permission" && 
+                (c.Value == "write.all" || c.Value == "write"))
+        ));
+
+    options.AddPolicy("ReadOrReadAllPolicy", policy =>
+        policy.RequireAssertion(context =>
+            context.User.HasClaim(c => c.Type == "Permission" && 
+                (c.Value == "read.all" || c.Value == "read"))
+        ));
+
+    options.AddPolicy("UpdateOrUpdateAllPolicy", policy =>
+        policy.RequireAssertion(context =>
+            context.User.HasClaim(c => c.Type == "Permission" && 
+                (c.Value == "update.all" || c.Value == "update"))
+        ));
+
+    options.AddPolicy("DeleteOrDeleteAllPolicy", policy =>
+        policy.RequireAssertion(context =>
+            context.User.HasClaim(c => c.Type == "Permission" && 
+                (c.Value == "delete.all" || c.Value == "delete"))
+        ));
 });
 
 //NOTE: Build the application

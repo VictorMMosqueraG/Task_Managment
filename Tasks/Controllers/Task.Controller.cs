@@ -17,8 +17,8 @@ namespace TaskManagement.Controllers{
             taskService = _taskService;
         }
 
-        [Authorize(Policy = "WriteAllPolicy")]//Admin
-        [Authorize(Policy = "WritePolicy")]//User
+
+        [Authorize(Policy = "WriteOrWriteAllPolicy")]
         [HttpPost]
         public async Task<IActionResult> CreateTask([FromBody]CreateTaskDto dto){
             try{
@@ -34,8 +34,7 @@ namespace TaskManagement.Controllers{
             }
         }
 
-        [Authorize(Policy = "ReadAllPolicy")]//Admin
-        [Authorize(Policy = "ReadPolicy")]//User
+        [Authorize(Policy = "ReadOrReadAllPolicy")]
         [HttpGet]
         public async Task<IActionResult> findAllTask(
             [FromQuery] PaginationTaskDto paginationTaskDto
@@ -50,8 +49,7 @@ namespace TaskManagement.Controllers{
         }
 
         
-        [Authorize(Policy = "DeleteAllPolicy")]//admin  
-        [Authorize(Policy = "DeletePolicy")]//user
+        [Authorize(Policy = "DeleteOrDeleteAllPolicy")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> deleteTask(
             [FromRoute] int id
@@ -67,9 +65,7 @@ namespace TaskManagement.Controllers{
         }
 
 
-        //COMEBACK: set permissions
-        [Authorize(Policy = "UpdateAllPolicy")]//Admin
-        [Authorize(Policy = "UpdatePolicy")]//User
+        [Authorize(Policy = "UpdateOrUpdateAllPolicy")]
         [HttpPut("{id}")]
         public async Task<IActionResult> updateTask(
             [FromBody]UpdateTaskDto updateTaskDto,
