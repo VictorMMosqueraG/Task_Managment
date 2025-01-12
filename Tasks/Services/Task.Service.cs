@@ -4,8 +4,11 @@ using TaskManagement.Interfaces;
 namespace TaskManagement.Services{
 
     public class TaskService : ITaskService{
+        
         private readonly ITaskRepository taskRepository;
         private readonly IUserService userService;
+
+
         public TaskService(
             ITaskRepository _taskRepository,
             IUserService _userService)
@@ -86,6 +89,10 @@ namespace TaskManagement.Services{
                 }).ToList();
 
             return formatData.Cast<object>().ToList();
+        }
+
+        public async Task<TaskEntity> delete(int id){
+            return await taskRepository.delete(id);
         }
     }
 }

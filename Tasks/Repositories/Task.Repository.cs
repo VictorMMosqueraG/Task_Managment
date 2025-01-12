@@ -28,5 +28,26 @@ namespace TaskManagement.Repositories{
 
             return tasks;
         }
+
+        public async Task<TaskEntity> delete(int id){
+            //find by id, if not found throw exception
+            var task = await findByIdOrFail(id);
+
+            context.Tasks.Remove(task);
+            await context.SaveChangesAsync();
+
+            return task;
+        }
+
+
+        private async Task<TaskEntity> findByIdOrFail(int id){
+            var task = await context.Tasks.FindAsync(id);
+
+            if(task == null){
+                throw new NotFoundException(id,"TASK");
+            }
+
+            return task;
+        }
     }
 }

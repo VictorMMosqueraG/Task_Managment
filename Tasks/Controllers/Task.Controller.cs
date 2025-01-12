@@ -17,8 +17,8 @@ namespace TaskManagement.Controllers{
             taskService = _taskService;
         }
 
-        [Authorize(Policy = "WriteAllPolicy")]
-        [Authorize(Policy = "WritePolicy")]
+        [Authorize(Policy = "WriteAllPolicy")]//Admin
+        [Authorize(Policy = "WritePolicy")]//User
         [HttpPost]
         public async Task<IActionResult> CreateTask([FromBody]CreateTaskDto dto){
             try{
@@ -34,14 +34,25 @@ namespace TaskManagement.Controllers{
             }
         }
 
+        [Authorize(Policy = "ReadAllPolicy")]//Admin
+        [Authorize(Policy = "ReadPolicy")]//User
         [HttpGet]
-        public async Task<IActionResult> findAll(
+        public async Task<IActionResult> findAllTask(
             [FromQuery] PaginationTaskDto paginationTaskDto
         ){
             var foundTasks = await taskService.findAll(paginationTaskDto);
             return Ok(foundTasks);
         }
 
-
+        
+        [Authorize(Policy = "DeleteAllPolicy")]//admin  
+        [Authorize(Policy = "DeletePolicy")]//user
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> deleteTask(
+            [FromRoute] int id
+        ){
+            var foundTask = await taskService.delete(id);
+            return Ok(foundTask);
+        }
     }
 }
