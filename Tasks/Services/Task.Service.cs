@@ -38,5 +38,54 @@ namespace TaskManagement.Services{
             
             return await taskRepository.add(taskEntity);
         }
+
+        //NOTE: Find all tasks
+        public async Task<List<object>> findAll(
+            PaginationTaskDto paginationTaskDto
+        ){
+
+            //Find all tasks
+            var foundTasks = await taskRepository.findAll();
+
+            //If search tittle is not null, filter the tasks
+            var filetTitle = foundTasks.Where(
+                task => task.tittle.Contains(paginationTaskDto.Tittle)
+            ).ToList();
+
+            //If search status is not null, filter the tasks
+            var filterStatus = filetTitle.Where(
+                task => task.status.Contains(paginationTaskDto.status)
+            ).ToList();
+
+            //If search user is not null, filter the tasks
+            var filterUser = filterStatus.Where(
+                task => task.user.Name.Contains(paginationTaskDto.user)
+            ).ToList();
+
+            //Sorting the tasks
+            var sortedTasks = paginationTaskDto.OrderBy.ToLower() == "asc"
+                ? filterUser.OrderBy(task => task.tittle)
+                : filterUser.OrderByDescending(task => task.tittle);
+
+
+            //Pagination: Skip the offset and take the limit and mapping data
+            var formatData = sortedTasks
+                .Skip(paginationTaskDto.Offset)
+                .Take(paginationTaskDto.Limit)
+                .Select(task => new{
+                    id = task.id,
+                    tittle = task.tittle,
+                    description = task.description,
+                    status = task.status,
+                    user= new {
+                        userId = task.user.Id,
+                        userName = task.user.Name
+                    },
+                    created_at = task.created_at,
+                    updated_at = task.updated_at
+                }).ToList();
+
+            return formatData.Cast<object>().ToList();
+        }
     }
 }

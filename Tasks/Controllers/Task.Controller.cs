@@ -10,7 +10,10 @@ namespace TaskManagement.Controllers{
     [ApiController]
     public class TaskController : ControllerBase{
         private readonly ITaskService taskService;
-        public TaskController(ITaskService _taskService){
+        
+        public TaskController(
+            ITaskService _taskService
+        ){
             taskService = _taskService;
         }
 
@@ -30,5 +33,15 @@ namespace TaskManagement.Controllers{
                 throw new UnexpectedErrorException("Unexpected Error");
             }
         }
+
+        [HttpGet]
+        public async Task<IActionResult> findAll(
+            [FromQuery] PaginationTaskDto paginationTaskDto
+        ){
+            var foundTasks = await taskService.findAll(paginationTaskDto);
+            return Ok(foundTasks);
+        }
+
+
     }
 }
