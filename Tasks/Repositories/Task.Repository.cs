@@ -8,11 +8,11 @@ namespace TaskManagement.Repositories{
 
     public class TaskRepository:ITaskRepository{
 
-      private readonly ApplicationDbContext context;
+        private readonly ApplicationDbContext context;
 
-      public TaskRepository(ApplicationDbContext applicationDbContext){
-          this.context = applicationDbContext;
-      }
+        public TaskRepository(ApplicationDbContext applicationDbContext){
+            context = applicationDbContext;
+        }
 
         public async Task<TaskEntity> add(TaskEntity taskEntity){
             context.Tasks.Add(taskEntity);
@@ -39,8 +39,19 @@ namespace TaskManagement.Repositories{
             return task;
         }
 
+        public async Task<TaskEntity> update(TaskEntity taskEntity){
+            // Mark the entity as modified
+            context.Entry(taskEntity).State = EntityState.Modified;
 
-        private async Task<TaskEntity> findByIdOrFail(int id){
+            // Save changes to the database
+            await context.SaveChangesAsync();
+            return taskEntity;
+        }
+
+
+
+        //NOTE: Base MEthods
+        public async Task<TaskEntity> findByIdOrFail(int id){
             var task = await context.Tasks.FindAsync(id);
 
             if(task == null){
@@ -49,5 +60,7 @@ namespace TaskManagement.Repositories{
 
             return task;
         }
+
+        
     }
 }

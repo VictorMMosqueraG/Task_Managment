@@ -12,5 +12,10 @@ namespace TaskManagement.Interfaces{
         );
 
         Task<TaskEntity> delete(int id);
+
+        Task<TaskEntity> update(
+            int id,
+            UpdateTaskDto updateTaskDto
+        );
     }
 }

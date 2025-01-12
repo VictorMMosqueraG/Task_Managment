@@ -94,5 +94,35 @@ namespace TaskManagement.Services{
         public async Task<TaskEntity> delete(int id){
             return await taskRepository.delete(id);
         }
+    
+    
+        public async Task<TaskEntity> update(
+            int id,
+            UpdateTaskDto updateTaskDto
+        ){
+
+            //Valid if the task with the id is valid and return data or error
+            var foundTask = await taskRepository.findByIdOrFail(id);
+
+
+            //Valid if the user exist, if is provide
+            var foundUser = foundTask.user;
+
+            if(updateTaskDto.user!=null){
+                foundUser = await userService.findByIdOrFail((int)updateTaskDto.user);
+            }
+                
+            //Valid if the data is provide by updateDto or not
+            var updateTask = foundTask;
+
+            foundTask.tittle = updateTaskDto.tittle ?? foundTask.tittle;
+            foundTask.description = updateTaskDto.description ?? foundTask.description;
+            foundTask.status = updateTaskDto.status ?? foundTask.status;
+            foundTask.user = foundUser ?? foundTask.user;
+            foundTask.updated_at = DateTime.UtcNow;
+
+
+            return await taskRepository.update(updateTask);
+        }
     }
 }

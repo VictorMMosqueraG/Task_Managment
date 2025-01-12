@@ -40,8 +40,13 @@ namespace TaskManagement.Controllers{
         public async Task<IActionResult> findAllTask(
             [FromQuery] PaginationTaskDto paginationTaskDto
         ){
-            var foundTasks = await taskService.findAll(paginationTaskDto);
-            return Ok(foundTasks);
+            try{
+                var foundTasks = await taskService.findAll(paginationTaskDto);    
+               return Ok(foundTasks);
+            }
+            catch (ArgumentException){
+                throw new UnexpectedErrorException("Unexpected Error");
+            }
         }
 
         
@@ -51,8 +56,37 @@ namespace TaskManagement.Controllers{
         public async Task<IActionResult> deleteTask(
             [FromRoute] int id
         ){
-            var foundTask = await taskService.delete(id);
-            return Ok(foundTask);
+            try{
+                var foundTask = await taskService.delete(id);
+                return Ok(foundTask);
+            }
+            catch (ArgumentException){
+                throw new UnexpectedErrorException("Unexpected Error");
+            }
+
+        }
+
+
+        //COMEBACK: set permissions
+        [Authorize(Policy = "UpdateAllPolicy")]//Admin
+        [Authorize(Policy = "UpdatePolicy")]//User
+        [HttpPut("{id}")]
+        public async Task<IActionResult> updateTask(
+            [FromBody]UpdateTaskDto updateTaskDto,
+            [FromRoute]int id
+        ){
+            try{
+                var updateTask = await taskService.update(id,updateTaskDto);
+
+                return StatusCode(201, new {
+                    status = 201,
+                    message = "Entity was update Successfully.",
+                    data = updateTask
+                });
+            }catch(ArgumentException){
+                throw new UnexpectedErrorException("Unexpected Error");
+            }
+
         }
     }
 }
