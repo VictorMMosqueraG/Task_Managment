@@ -18,6 +18,15 @@ namespace TaskManagement.Controllers{
         }
 
 
+        /// <summary>
+        /// Crea una nueva tarea.
+        /// </summary>
+        /// <param name="dto">Objeto con los datos necesarios para crear una tarea.</param>
+        /// <returns>Un código de estado 201 si la tarea fue creada exitosamente.</returns>
+        /// <response code="201">Tarea creada exitosamente.</response>
+        /// <response code="400">Solicitud incorrecta o datos inválidos.</response>
+        /// /// <response code="404">No se encontro el user id.</response>
+        /// <response code="401">No autorizado. Se requiere un token válido.</response>
         [Authorize(Policy = "WriteOrWriteAllPolicy")]
         [HttpPost]
         public async Task<IActionResult> CreateTask([FromBody]CreateTaskDto dto){
@@ -34,6 +43,13 @@ namespace TaskManagement.Controllers{
             }
         }
 
+        /// <summary>
+        /// Obtiene todas las tareas con paginación.
+        /// </summary>
+        /// <param name="paginationTaskDto">Datos de paginación para limitar y ordenar los resultados.</param>
+        /// <returns>Una lista de tareas encontradas según los parámetros de paginación.</returns>
+        /// <response code="200">Lista de tareas.</response>
+        /// <response code="401">No autorizado. Se requiere un token válido.</response>        
         [Authorize(Policy = "ReadOrReadAllPolicy")]
         [HttpGet]
         public async Task<IActionResult> findAllTask(
@@ -48,7 +64,15 @@ namespace TaskManagement.Controllers{
             }
         }
 
-        
+
+        /// <summary>
+        /// Elimina una tarea por su ID.
+        /// </summary>
+        /// <param name="id">ID de la tarea que se desea eliminar.</param>
+        /// <returns>Un código de estado 200 si la tarea fue eliminada exitosamente.</returns>
+        /// <response code="200">Tarea eliminada exitosamente.</response>
+        /// <response code="404">El id no se encontro.</response>
+        /// <response code="401">No autorizado. Se requiere un token válido.</response>        
         [Authorize(Policy = "DeleteOrDeleteAllPolicy")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> deleteTask(
@@ -65,6 +89,16 @@ namespace TaskManagement.Controllers{
         }
 
 
+         /// <summary>
+        /// Actualiza una tarea existente por su ID.
+        /// </summary>
+        /// <param name="updateTaskDto">Objeto con los datos a actualizar en la tarea.</param>
+        /// <param name="id">ID de la tarea a actualizar.</param>
+        /// <returns>Un código de estado 201 si la tarea fue actualizada exitosamente.</returns>
+        /// <response code="201">Tarea actualizada exitosamente.</response>
+        /// <response code="400">Solicitud incorrecta o datos inválidos.</response>
+        /// /// <response code="401">El user id o el id task no se encontro.</response>
+        /// <response code="401">No autorizado. Se requiere un token válido.</response>
         [Authorize(Policy = "UpdateOrUpdateAllPolicy")]
         [HttpPut("{id}")]
         public async Task<IActionResult> updateTask(
