@@ -20,12 +20,18 @@ namespace TaskManagement.Controllers{
         [Authorize(Policy = "ReadAllPolicy")]
         [HttpGet]
         public async Task<IActionResult> finAllUser([FromQuery] PaginationUserDto paginationUserDto){
-            var users = await service.findAll(paginationUserDto);
+            try{
+                 var users = await service.findAll(paginationUserDto);
 
-            return StatusCode(200, new {
+                return StatusCode(200, new {
                     status = 200,
                     data = users 
-            });
+                });
+            }
+            catch (ArgumentException){
+                throw new UnexpectedErrorException("Unexpected Error");
+            }
+           
         }
     }
 }

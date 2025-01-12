@@ -1,6 +1,4 @@
 
-using TaskManagement.Entity;
-
 namespace TaskManagement.DTOs{
 
     public class ListUserDto{

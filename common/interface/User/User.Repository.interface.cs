@@ -6,5 +6,7 @@ namespace TaskManagement.Interfaces{
         Task<User> add(User user);
         Task<User?> FindByEmail(string email);
         Task<List<User>> findAll();
+
+        Task<User?> findByIdOrFail(int userId);
     }
 }

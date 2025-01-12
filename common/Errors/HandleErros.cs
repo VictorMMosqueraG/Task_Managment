@@ -26,6 +26,9 @@ namespace TaskManagement.Middleware
             catch (UnexpectedErrorException ex){
                 await UnexpectedErrorException(context, ex);
             }
+            catch (EnumException ex){
+                await HandleEnumException(context, ex);
+            }
             catch(UnauthorizedException ex){
                 await HandleUnauthorizedException(context, ex);
             }
@@ -62,6 +65,18 @@ namespace TaskManagement.Middleware
         private Task HandleNotFoundException(HttpContext context, NotFoundException ex){
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = 404; 
+
+            var errorResponse = new{
+                status = context.Response.StatusCode,
+                message = ex.Message 
+            };
+
+            return context.Response.WriteAsync(JsonSerializer.Serialize(errorResponse));
+        }
+
+        private Task HandleEnumException(HttpContext context, EnumException ex){
+            context.Response.ContentType = "application/json";
+            context.Response.StatusCode = 400; 
 
             var errorResponse = new{
                 status = context.Response.StatusCode,
