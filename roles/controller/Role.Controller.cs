@@ -18,6 +18,14 @@ namespace TaskManagement.Controllers{
             service = _service;
         }
 
+        /// <summary>
+        /// Crea un nuevo rol en el sistema.
+        /// </summary>
+        /// <param name="role">Objeto con la información del rol a crear.</param>
+        /// <returns>Un código de estado 201 si el rol se creó exitosamente.</returns>
+        /// <response code="201">Rol creado exitosamente.</response>
+        /// <response code="400">EL role ya existe o el id del permiso no se encontro.</response>
+        /// <response code="401">No autorizado. Se requiere un token válido.</response>
         //NOTE: Save Role
         [Authorize(Policy = "WriteAllPolicy")]
         [HttpPost]

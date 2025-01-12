@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>task_managment</name>
+    </assembly>
+    <members>
+        <member name="M:TaskManagement.Controllers.AuthController.createUser(TaskManagement.DTOs.CreateUserDto)">
+            <summary>
+            Registra un nuevo usuario en el sistema.
+            </summary>
+            <param name="user">Objeto con la información del usuario para el registro.</param>
+            <returns>Un código de estado 201 si el registro fue exitoso.</returns>
+            <response code="201">Usuario registrado exitosamente.</response>
+            <response code="400">Solicitud incorrecta o datos inválidos.</response>
+            /// <response code="404">Role no encontrado.</response>
+            <response code="500">Error no controlado .</response>
+        </member>
+        <member name="M:TaskManagement.Controllers.AuthController.Login(TaskManagement.DTOs.LoginDto)">
+            <summary>
+            Inicia sesión con las credenciales del usuario.
+            </summary>
+            <param name="loginDto">Objeto que contiene el correo electrónico y la contraseña.</param>
+            <returns>Un token JWT si la autenticación es exitosa.</returns>
+            <response code="200">Autenticación exitosa y token JWT.</response>
+            <response code="401">Credenciales inválidas.</response>        
+        </member>
+        <member name="M:TaskManagement.Controllers.PermissionController.CreatePermission(TaskManagement.DTOs.CreatePermissionDto)">
+            <summary>
+            Crea un nuevo permiso en el sistema.
+            </summary>
+            <param name="permission">Objeto con la información del permiso a crear.</param>
+            <returns>Un código de estado 201 si el permiso se creó exitosamente.</returns>
+            <response code="201">Permiso creado exitosamente.</response>
+            <response code="400">Nombre ya registrado en la db.</response>
+             /// <response code="401">No autorizado. Se requiere un token válido.</response>
+        </member>
+        <member name="M:TaskManagement.Controllers.RoleController.CreateRole(TaskManagement.DTOs.CreateRoleDTO)">
+            <summary>
+            Crea un nuevo rol en el sistema.
+            </summary>
+            <param name="role">Objeto con la información del rol a crear.</param>
+            <returns>Un código de estado 201 si el rol se creó exitosamente.</returns>
+            <response code="201">Rol creado exitosamente.</response>
+            <response code="400">EL role ya existe o el id del permiso no se encontro.</response>
+            <response code="401">No autorizado. Se requiere un token válido.</response>
+        </member>
+        <member name="M:TaskManagement.Controllers.TaskController.CreateTask(TaskManagement.DTOs.CreateTaskDto)">
+            <summary>
+            Crea una nueva tarea.
+            </summary>
+            <param name="dto">Objeto con los datos necesarios para crear una tarea.</param>
+            <returns>Un código de estado 201 si la tarea fue creada exitosamente.</returns>
+            <response code="201">Tarea creada exitosamente.</response>
+            <response code="400">Solicitud incorrecta o datos inválidos.</response>
+            /// <response code="404">No se encontro el user id.</response>
+            <response code="401">No autorizado. Se requiere un token válido.</response>
+        </member>
+        <member name="M:TaskManagement.Controllers.TaskController.findAllTask(TaskManagement.DTOs.PaginationTaskDto)">
+            <summary>
+            Obtiene todas las tareas con paginación.
+            </summary>
+            <param name="paginationTaskDto">Datos de paginación para limitar y ordenar los resultados.</param>
+            <returns>Una lista de tareas encontradas según los parámetros de paginación.</returns>
+            <response code="200">Lista de tareas.</response>
+            <response code="401">No autorizado. Se requiere un token válido.</response>        
+        </member>
+        <member name="M:TaskManagement.Controllers.TaskController.deleteTask(System.Int32)">
+            <summary>
+            Elimina una tarea por su ID.
+            </summary>
+            <param name="id">ID de la tarea que se desea eliminar.</param>
+            <returns>Un código de estado 200 si la tarea fue eliminada exitosamente.</returns>
+            <response code="200">Tarea eliminada exitosamente.</response>
+            <response code="404">El id no se encontro.</response>
+            <response code="401">No autorizado. Se requiere un token válido.</response>        
+        </member>
+        <member name="M:TaskManagement.Controllers.TaskController.updateTask(TaskManagement.DTOs.UpdateTaskDto,System.Int32)">
+            <summary>
+            Actualiza una tarea existente por su ID.
+            </summary>
+            <param name="updateTaskDto">Objeto con los datos a actualizar en la tarea.</param>
+            <param name="id">ID de la tarea a actualizar.</param>
+            <returns>Un código de estado 201 si la tarea fue actualizada exitosamente.</returns>
+            <response code="201">Tarea actualizada exitosamente.</response>
+            <response code="400">Solicitud incorrecta o datos inválidos.</response>
+            /// <response code="401">El user id o el id task no se encontro.</response>
+            <response code="401">No autorizado. Se requiere un token válido.</response>
+        </member>
+        <member name="T:task_managment.Migrations.InitialCreate">
+            <inheritdoc />
+        </member>
+        <member name="M:task_managment.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:task_managment.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:task_managment.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>
