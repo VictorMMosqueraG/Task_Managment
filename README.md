@@ -7,7 +7,7 @@ This project is a task management system developed by **VM Software**, where use
 - [Environment Variables](#environment-variables)
 - [Setup and Dependencies](#setup-and-dependencies)
 - [Commit Message Structure](#commit-message-guidelines)
----
+- [Seed DataBase](#seed-database)
 
 ## Branch Naming Convention
 
@@ -132,3 +132,8 @@ Each commit message should follow this structure:
 ---
 
 By adhering to these commit message guidelines, we ensure a well-maintained and organized project history that improves both collaboration and automation.
+
+## Seed Database
+If you want to populate the database, you need to run the project (instructions are provided in the previous sections). After that, go to the `script` folder, then navigate to the `database` folder, and look for the `see.database.sql` file. Next, run the script in your database management tool. This script will only populate the permissions, roles, and their relationships. You will need to use the endpoint to create a user and assign the desired role (admin or user).
+
+**NOTE:** In production, this file should be deleted or ignored in the Dockerfile.
