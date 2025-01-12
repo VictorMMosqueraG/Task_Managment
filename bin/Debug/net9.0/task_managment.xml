@@ -24,6 +24,16 @@
             <response code="200">Autenticación exitosa y token JWT.</response>
             <response code="401">Credenciales inválidas.</response>        
         </member>
+        <member name="M:TaskManagement.Controllers.PermissionController.CreatePermission(TaskManagement.DTOs.CreatePermissionDto)">
+            <summary>
+            Crea un nuevo permiso en el sistema.
+            </summary>
+            <param name="permission">Objeto con la información del permiso a crear.</param>
+            <returns>Un código de estado 201 si el permiso se creó exitosamente.</returns>
+            <response code="201">Permiso creado exitosamente.</response>
+            <response code="400">Nombre ya registrado en la db.</response>
+             /// <response code="401">No autorizado. Se requiere un token válido.</response>
+        </member>
         <member name="T:task_managment.Migrations.InitialCreate">
             <inheritdoc />
         </member>

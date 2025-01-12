@@ -32,18 +32,40 @@ builder.Services.AddScoped<IAuthService,AuthServices>();
 
 // Add Swagger with XML comments
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(options =>
-{
+builder.Services.AddSwaggerGen(options =>{
+
     var xmlFile = $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name}.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     options.IncludeXmlComments(xmlPath);
 
-    options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
-    {
+    options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo{
         Title = "API de Gestión de Tareas",
         Version = "v1",
         Description = "Documentación de la API de Gestión de Tareas",
     });
+
+
+        options.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme{
+            In = Microsoft.OpenApi.Models.ParameterLocation.Header,
+            Description = "Por favor, ingresa el token JWT en el formato: Bearer {token}",
+            Name = "Authorization",
+            Type = Microsoft.OpenApi.Models.SecuritySchemeType.ApiKey,
+            BearerFormat = "JWT"
+        });
+
+        options.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement{
+            {
+                new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+                {
+                    Reference = new Microsoft.OpenApi.Models.OpenApiReference
+                    {
+                        Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
+                        Id = "Bearer"
+                    }
+                },
+                new string[] {}
+            }
+        });
 });
 
 

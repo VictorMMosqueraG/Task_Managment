@@ -17,6 +17,14 @@ namespace TaskManagement.Controllers{
             _service = service;
         }
 
+        /// <summary>
+        /// Crea un nuevo permiso en el sistema.
+        /// </summary>
+        /// <param name="permission">Objeto con la información del permiso a crear.</param>
+        /// <returns>Un código de estado 201 si el permiso se creó exitosamente.</returns>
+        /// <response code="201">Permiso creado exitosamente.</response>
+        /// <response code="400">Nombre ya registrado en la db.</response>
+        ///  /// <response code="401">No autorizado. Se requiere un token válido.</response>
         //NOTE: Save Permission
         [Authorize(Policy = "WriteAllPolicy")]
         [HttpPost]
