@@ -1,6 +1,7 @@
 @page
+@model TaskManagement.Pages.TaskListModel
 @{
-    ViewData["Title"] = "TaskList";
+    ViewData["Title"] = "Task List";
 }
 
 <!DOCTYPE html>
@@ -9,9 +10,67 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewData["Title"]</title>
-    <link href="~/css/login/loginStyle.css" rel="stylesheet">
+    <link href="~/css/task/list/list.css" rel="stylesheet">
 </head>
 <body>
-   <h1>Test TaskList</h1>
+    <h1>Task List</h1>
+
+    <h2>Formulario de Filtros</h2>
+
+    <form method="get">
+        <div>
+            <label for="Tittle">Tittle:</label>
+            @Html.TextBoxFor(m => m.Pagination.Tittle, new { @class = "form-control" })
+        </div>
+
+        <div>
+            <label for="Status">Status:</label>
+            @Html.DropDownListFor(m => m.Pagination.status, new SelectList(
+                new List<string> { "All", "InProgress", "Completed", "Pending" }, Model.Pagination.status), 
+                "Select Status", new { @class = "form-control" })
+        </div>
+
+        <div>
+            <label for="User">User:</label>
+            @Html.TextBoxFor(m => m.Pagination.user, new { @class = "form-control" })
+        </div>
+
+        <div>
+            <label for="SortOrder">Sort Order:</label>
+            @Html.DropDownListFor(m => m.Pagination.OrderBy, new SelectList(
+                new List<string> { "asc", "desc" }, Model.Pagination.OrderBy), 
+                "Select Sort Order", new { @class = "form-control" })
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-primary">Filtrar</button>
+        </div>
+    </form>
+
+    @if (Model.Tasks != null && Model.Tasks.Any())
+    {
+        <ul>
+            @foreach (var task in Model.Tasks)
+            {
+                <li>
+                    <strong>@task["tittle"]</strong><br />
+                    @task["description"]<br />
+                    Status: @task["status"]<br />
+                    User: @task["userName"]<br />
+                    Created At: @task["created_at"]<br />
+                    Update at: @task["updated_at"]<br/>
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p>No tasks available.</p>
+    }
+
+    @if (!string.IsNullOrEmpty(Model.Message))
+    {
+        <p style="color: red;">@Model.Message</p>
+    }
 </body>
 </html>

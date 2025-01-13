@@ -27,9 +27,9 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITaskService, TaskService>();
 builder.Services.AddScoped<AuthServiceJwt>();
 builder.Services.AddScoped<IAuthService,AuthServices>();
+builder.Services.AddHttpClient();
 
 //NOTE Add service to Swagger
-
 // Add Swagger with XML comments
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>{
@@ -173,6 +173,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.MapRazorPages();
 app.UseStaticFiles();// using for load files type css to html
+
 
 //Apply migrations (if necessary) at runtime
 //NOTE: This is not recommended for production

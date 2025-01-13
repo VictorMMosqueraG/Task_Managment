@@ -80,10 +80,7 @@ namespace TaskManagement.Services{
                     tittle = task.tittle,
                     description = task.description,
                     status = task.status,
-                    user= new {
-                        userId = task.user.Id,
-                        userName = task.user.Name
-                    },
+                    userName = task.user.Name,
                     created_at = task.created_at,
                     updated_at = task.updated_at
                 }).ToList();
