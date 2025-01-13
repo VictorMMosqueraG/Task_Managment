@@ -15,7 +15,7 @@ namespace TaskManagement.Repositories{
         }
 
         public async Task<User> add(User user){
-            context.User.Add(user);
+            await context.User.AddAsync(user);
             await context.SaveChangesAsync();
             return user;
         }

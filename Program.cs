@@ -147,6 +147,10 @@ builder.Services.AddAuthorization(options =>{
         ));
 });
 
+
+//NOTE: Razor
+builder.Services.AddRazorPages();
+
 //NOTE: Build the application
 var app = builder.Build();
 
@@ -163,10 +167,12 @@ if (app.Environment.IsDevelopment()){
 //NOTE: Middleware for handling errors
 app.UseMiddleware<TaskManagement.Middleware.ExceptionHandle>();
 
-//NOTE: Use routing, authentication and authorization
+//NOTE: Use routing, Map Razor, authentication and authorization
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+app.MapRazorPages();
+app.UseStaticFiles();// using for load files type css to html
 
 //Apply migrations (if necessary) at runtime
 //NOTE: This is not recommended for production
