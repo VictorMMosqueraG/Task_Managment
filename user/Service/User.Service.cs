@@ -47,6 +47,11 @@ namespace TaskManagement.Services{
 
             return user;
         }
+
+        public async Task<List<User>> GetAllUsersAsync()
+        {
+            return await userRepository.GetAllUsersAsync();
+        }
     }
 
 }

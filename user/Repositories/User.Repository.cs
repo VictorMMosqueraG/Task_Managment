@@ -45,5 +45,10 @@ namespace TaskManagement.Repositories{
 
             return user;
         }
+
+        //NOTE: all users by forms frontend
+        public async Task<List<User>> GetAllUsersAsync(){
+            return await context.User.ToListAsync();
+        }
     }
 }

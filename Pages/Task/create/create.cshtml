@@ -1,0 +1,58 @@
+@page
+@model TaskManagement.Pages.CreateTaskModel
+@{
+    ViewData["Title"] = "Create New Task";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link href="~/css/task/create/create.css" rel="stylesheet">
+</head>
+<body>
+    <h1>Create New Task</h1>
+
+    <form method="post">
+        <div>
+            <label for="Tittle">Tittle:</label>
+            <input type="text" name="Tittle" class="form-control" required />
+        </div>
+
+        <div>
+            <label for="Description">Description:</label>
+            <textarea name="Description" class="form-control"></textarea>
+        </div>
+
+        <div>
+            <label for="Status">Status:</label>
+            <select name="Status" class="form-control" required>
+                <option value="InProgress">In Progress</option>
+                <option value="Completed">Completed</option>
+                <option value="Pending">Pending</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="User">User:</label>
+            <select name="User" class="form-control" required>
+                @foreach (var user in Model.Users)
+                {
+                    <option value="@user.Id">@user.Name</option>
+                }
+            </select>
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-primary">Create Task</button>
+        </div>
+    </form>
+
+    @if (!string.IsNullOrEmpty(Model.Message))
+    {
+        <p style="color: red;">@Model.Message</p>
+    }
+</body>
+</html>
