@@ -17,5 +17,9 @@ namespace TaskManagement.Interfaces{
             int id,
             UpdateTaskDto updateTaskDto
         );
+
+        Task<TaskEntity> findByIdOrFail(int userId);
+
+         Task<List<TaskEntity>> findAllBase();
     }
 }
