@@ -3,7 +3,8 @@
         "BUGREPORT",
         "encontrado",
         "Hmac",
-        "Npgsql"
+        "Npgsql",
+        "Xunit"
     ],
     "todo-tree.general.tagGroups": {}
 }
