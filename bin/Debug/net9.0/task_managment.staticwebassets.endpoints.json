@@ -1195,6 +1195,304 @@
       ]
     },
     {
+      "Route": "css/task/delete/delete.c9bqnx0oyz.css",
+      "AssetFile": "css/task/delete/delete.css.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.002123142251"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "470"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"0m2dG+9JihQJY04UX4yzTD6wN4r2/aa+r6xQpON6MKw=\""
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"gFYTMw2omIlQ0KR8/ayUCVuel6RP+X+51fdenzKNpKA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Jan 2025 21:17:47 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "c9bqnx0oyz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-gFYTMw2omIlQ0KR8/ayUCVuel6RP+X+51fdenzKNpKA="
+        },
+        {
+          "Name": "label",
+          "Value": "css/task/delete/delete.css"
+        }
+      ]
+    },
+    {
+      "Route": "css/task/delete/delete.c9bqnx0oyz.css",
+      "AssetFile": "css/task/delete/delete.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1131"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"gFYTMw2omIlQ0KR8/ayUCVuel6RP+X+51fdenzKNpKA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Jan 2025 21:17:47 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "c9bqnx0oyz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-gFYTMw2omIlQ0KR8/ayUCVuel6RP+X+51fdenzKNpKA="
+        },
+        {
+          "Name": "label",
+          "Value": "css/task/delete/delete.css"
+        }
+      ]
+    },
+    {
+      "Route": "css/task/delete/delete.c9bqnx0oyz.css.gz",
+      "AssetFile": "css/task/delete/delete.css.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "470"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"0m2dG+9JihQJY04UX4yzTD6wN4r2/aa+r6xQpON6MKw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Jan 2025 21:17:47 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "c9bqnx0oyz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-0m2dG+9JihQJY04UX4yzTD6wN4r2/aa+r6xQpON6MKw="
+        },
+        {
+          "Name": "label",
+          "Value": "css/task/delete/delete.css.gz"
+        }
+      ]
+    },
+    {
+      "Route": "css/task/delete/delete.css",
+      "AssetFile": "css/task/delete/delete.css.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.002123142251"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "470"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"0m2dG+9JihQJY04UX4yzTD6wN4r2/aa+r6xQpON6MKw=\""
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"gFYTMw2omIlQ0KR8/ayUCVuel6RP+X+51fdenzKNpKA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Jan 2025 21:17:47 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-gFYTMw2omIlQ0KR8/ayUCVuel6RP+X+51fdenzKNpKA="
+        }
+      ]
+    },
+    {
+      "Route": "css/task/delete/delete.css",
+      "AssetFile": "css/task/delete/delete.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1131"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"gFYTMw2omIlQ0KR8/ayUCVuel6RP+X+51fdenzKNpKA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Jan 2025 21:17:47 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-gFYTMw2omIlQ0KR8/ayUCVuel6RP+X+51fdenzKNpKA="
+        }
+      ]
+    },
+    {
+      "Route": "css/task/delete/delete.css.gz",
+      "AssetFile": "css/task/delete/delete.css.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "470"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"0m2dG+9JihQJY04UX4yzTD6wN4r2/aa+r6xQpON6MKw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Jan 2025 21:17:47 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-0m2dG+9JihQJY04UX4yzTD6wN4r2/aa+r6xQpON6MKw="
+        }
+      ]
+    },
+    {
       "Route": "css/task/list/list.css",
       "AssetFile": "css/task/list/list.css.gz",
       "Selectors": [
@@ -1533,7 +1831,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 13 Jan 2025 20:29:43 GMT"
+          "Value": "Mon, 13 Jan 2025 20:32:27 GMT"
         },
         {
           "Name": "Vary",
@@ -1582,7 +1880,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 13 Jan 2025 20:29:43 GMT"
+          "Value": "Mon, 13 Jan 2025 20:32:27 GMT"
         }
       ],
       "EndpointProperties": [
@@ -1631,7 +1929,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 13 Jan 2025 20:29:43 GMT"
+          "Value": "Mon, 13 Jan 2025 20:32:27 GMT"
         },
         {
           "Name": "Vary",
@@ -1694,7 +1992,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 13 Jan 2025 20:29:43 GMT"
+          "Value": "Mon, 13 Jan 2025 20:32:27 GMT"
         },
         {
           "Name": "Vary",
@@ -1735,7 +2033,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 13 Jan 2025 20:29:43 GMT"
+          "Value": "Mon, 13 Jan 2025 20:32:27 GMT"
         }
       ],
       "EndpointProperties": [
@@ -1776,7 +2074,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 13 Jan 2025 20:29:43 GMT"
+          "Value": "Mon, 13 Jan 2025 20:32:27 GMT"
         },
         {
           "Name": "Vary",
