@@ -121,5 +121,14 @@ namespace TaskManagement.Services{
 
             return await taskRepository.update(updateTask);
         }
+
+
+        public async Task<List<TaskEntity>> findAllBase(){
+            return await taskRepository.findAll();
+        }
+
+        public async Task<TaskEntity> findByIdOrFail(int id){
+            return await taskRepository.findByIdOrFail(id);
+        }
     }
 }

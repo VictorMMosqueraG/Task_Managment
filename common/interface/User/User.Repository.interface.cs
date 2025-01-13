@@ -8,5 +8,6 @@ namespace TaskManagement.Interfaces{
         Task<List<User>> findAll();
 
         Task<User?> findByIdOrFail(int userId);
+        Task<List<User>> GetAllUsersAsync();//Method by forms view
     }
 }

@@ -1,0 +1,59 @@
+@page
+@model TaskManagement.Pages.UpdateTaskModel
+@{
+    ViewData["Title"] = "Update Task";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link href="~/css/task/update/update.css" rel="stylesheet">
+</head>
+<body>
+    <h2>Update Task</h2>
+
+    <form method="post">
+        <div>
+             <label for="TaskId">Task:</label>
+            <select name="TaskId" id="TaskId" class="form-control" required>
+                @foreach (var task in Model.Tasks)
+                {
+                    <option value="@task.id">@task.tittle</option>
+                }
+            </select>
+        </div>
+
+        <div>
+            <label for="Tittle">Title:</label>
+            <input type="text" id="Tittle" name="Tittle" value="@Model.Tittle" />
+        </div>
+
+        <div>
+            <label for="Description">Description:</label>
+            <input type="text" id="Description" name="Description" value="@Model.Description" />
+        </div>
+
+        <div>
+            <label for="Status">Status:</label>
+            <input type="text" id="Status" name="Status" value="@Model.Status" />
+        </div>
+
+        <div>
+            <label for="User">User:</label>
+            <select name="User" class="form-control" required>
+                @foreach (var user in Model.Users)
+                {
+                    <option value="@user.Id">@user.Name</option>
+                }
+            </select>
+        </div>
+        <div>
+            <button type="submit">Update Task</button>
+        </div>
+    </form>
+
+</body>
+</html>
