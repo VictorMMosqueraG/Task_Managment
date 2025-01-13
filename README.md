@@ -8,6 +8,7 @@ This project is a task management system developed by **VM Software**, where use
 - [Setup and Dependencies](#setup-and-dependencies)
 - [Commit Message Structure](#commit-message-guidelines)
 - [Seed DataBase](#seed-database)
+- [Test](#test)
 
 ## Branch Naming Convention
 
@@ -137,3 +138,28 @@ By adhering to these commit message guidelines, we ensure a well-maintained and 
 If you want to populate the database, you need to run the project (instructions are provided in the previous sections). After that, go to the `script` folder, then navigate to the `database` folder, and look for the `see.database.sql` file. Next, run the script in your database management tool. This script will only populate the permissions, roles, and their relationships. You will need to use the endpoint to create a user and assign the desired role (admin or user).
 
 **NOTE:** In production, this file should be deleted or ignored in the Dockerfile.
+
+## Test
+This project uses automated tests to ensure that the code behaves as expected. Tests are written using XUnit and Moq for mocks, and are located in the TaskManagement.Test folder.
+
+Test Structure
+Tests in this project are organized into classes corresponding to the main controllers and services. Each test class focuses on testing a specific controller or service to ensure the expected behavior.
+
+Running Tests
+To run the tests for this project, follow these steps:
+
+Make sure you have the necessary dependencies: If you don't have the necessary dependencies installed, you can restore the NuGet packages by running the following command:
+
+```
+dotnet restore
+```
+**Run the tests:** After restoring the dependencies, you can run the tests using the following command:
+
+```
+dotnet test
+```
+
+This command will run all tests in the project and generate a report in the terminal about the status of the tests. If all tests pass, you'll see a message indicating that the tests were successful.
+
+View the results: After running the tests, you'll see the results in the console. If any test fails, the error message will provide information about the cause of the failure.
+
