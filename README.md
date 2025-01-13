@@ -9,6 +9,8 @@ This project is a task management system developed by **VM Software**, where use
 - [Commit Message Structure](#commit-message-guidelines)
 - [Seed DataBase](#seed-database)
 - [Test](#test)
+- [Accessing the Frontend](#accessing-the-frontend)
+- [Accessing Swagger](#accessing-swagger)
 
 ## Branch Naming Convention
 
@@ -163,3 +165,47 @@ This command will run all tests in the project and generate a report in the term
 
 View the results: After running the tests, you'll see the results in the console. If any test fails, the error message will provide information about the cause of the failure.
 
+
+
+## Accessing the Frontend
+
+To view the frontend of the application, which was developed using Razor in ASP.NET Core, follow these steps:
+
+Ensure the Project is Running:
+Start the project on your local machine by running the following command:
+
+```
+dotnet run
+```
+
+**Access the Frontend:**
+Once the project is running, open your web browser and navigate to the following URL:
+
+```
+http://localhost:5025/home/home
+```
+**Interacting with the Interface:**
+On this page, you'll be able to view the frontend interface where you can manage tasks, assign priorities, and more. Make sure the backend is running properly for all functionalities to work.
+
+
+## Accessing Swagger
+
+Swagger is a powerful tool that simplifies API development, documentation, and testing. In a software project, it serves as an interactive interface for both developers and testers to explore and communicate with the API, making it easier to understand the endpoints, their functionality, and how to integrate with them.
+
+In this project, Swagger is used to automatically generate API documentation and provide an interactive environment to test and interact with the backend API directly.
+
+Steps to Access Swagger UI
+Ensure the Project is Running:
+First, make sure the project is running on your local machine. If it's not already running, use the following command to start the project:
+
+```
+dotnet run
+```
+
+**Access Swagger:**
+After the project is running, open a web browser and go to the following URL:
+
+```
+http://localhost:5025
+```
+This will bring up the Swagger UI, where you can explore the project's API.
