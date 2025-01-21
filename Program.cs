@@ -9,6 +9,16 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//Configure CORS
+builder.Services.AddCors(options =>{
+    options.AddPolicy("AllowAngularOrigins",
+        policy =>{
+            policy.WithOrigins("http://localhost:4200") 
+                  .AllowAnyHeader()
+                  .AllowAnyMethod()
+                  .AllowCredentials(); 
+        });
+});
 // Configure the DbContext with the connection string
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
@@ -153,6 +163,8 @@ builder.Services.AddRazorPages();
 
 //NOTE: Build the application
 var app = builder.Build();
+
+app.UseCors("AllowAngularOrigins"); 
 
 //NOTE: Middleware for Swagger
 if (app.Environment.IsDevelopment()){
