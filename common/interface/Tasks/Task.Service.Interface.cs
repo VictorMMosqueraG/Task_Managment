@@ -21,5 +21,6 @@ namespace TaskManagement.Interfaces{
         Task<TaskEntity> findByIdOrFail(int userId);
 
          Task<List<TaskEntity>> findAllBase();
+        Task<TaskEntity> findByIdOrFailWithUser(int id);
     }
 }

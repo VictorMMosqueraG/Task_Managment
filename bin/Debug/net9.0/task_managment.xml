@@ -86,6 +86,14 @@
             /// <response code="401">El user id o el id task no se encontro.</response>
             <response code="401">No autorizado. Se requiere un token válido.</response>
         </member>
+        <member name="M:TaskManagement.Controllers.TaskController.findAllBase">
+            <summary>
+            Obtiene todas las tareas básicas sin filtros o paginación.
+            </summary>
+            <returns>Una lista de tareas básicas.</returns>
+            <response code="200">Lista de tareas básicas.</response>
+            <response code="401">No autorizado. Se requiere un token válido.</response>
+        </member>
         <member name="M:TaskManagement.Controllers.UserController.finAllUser(TaskManagement.DTOs.PaginationUserDto)">
             <summary>
             Obtiene una lista de usuarios con paginación.

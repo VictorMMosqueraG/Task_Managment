@@ -135,5 +135,23 @@ namespace TaskManagement.Controllers{
                 throw new UnexpectedErrorException("Unexpected Error");
             }
         }
+
+        /// <summary>
+        /// Obtiene una tarea por su ID, junto con los detalles del usuario asignado.
+        /// </summary>
+        /// <param name="id">ID de la tarea que se desea obtener.</param>
+        /// <returns>La tarea encontrada, junto con la información del usuario asignado.</returns>
+        /// <response code="200">Tarea encontrada junto con el usuario asignado.</response>
+        /// <response code="404">No se encontró una tarea con el ID proporcionado.</response>
+        [HttpGet("findTaskById/{id}")]
+        public async Task<IActionResult> findByIdOrFailWithUser(int id){
+            try{
+                var foundTask = await taskService.findByIdOrFailWithUser(id);
+                return Ok(foundTask);   
+            }
+            catch (ArgumentException){
+                throw new UnexpectedErrorException("Unexpected Error");
+            }
+        }
     }
 }

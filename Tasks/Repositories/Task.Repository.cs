@@ -52,6 +52,7 @@ namespace TaskManagement.Repositories{
 
         //NOTE: Base MEthods
         public async Task<TaskEntity> findByIdOrFail(int id){
+            
             var task = await context.Tasks.FindAsync(id);
 
             if(task == null){
@@ -61,6 +62,16 @@ namespace TaskManagement.Repositories{
         }
 
       
+        public async Task<TaskEntity> findByIdOrFaiWithUser(int id){
+            var task = await context.Tasks
+                            .Include(t => t.user) 
+                            .FirstOrDefaultAsync(t => t.id == id);
+
+            if (task == null){
+                throw new NotFoundException(id, "TASK");
+            }
+            return task;
+        }
 
         
     }

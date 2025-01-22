@@ -130,5 +130,9 @@ namespace TaskManagement.Services{
         public async Task<TaskEntity> findByIdOrFail(int id){
             return await taskRepository.findByIdOrFail(id);
         }
+
+        public async Task<TaskEntity> findByIdOrFailWithUser(int id){
+            return await taskRepository.findByIdOrFaiWithUser(id);
+        }
     }
 }

@@ -13,5 +13,6 @@ namespace TaskManagement.Interfaces{
         Task<TaskEntity> update(TaskEntity taskEntity);
 
         Task<TaskEntity> findByIdOrFail(int id);
+        Task<TaskEntity> findByIdOrFaiWithUser(int id);
     }
 }
