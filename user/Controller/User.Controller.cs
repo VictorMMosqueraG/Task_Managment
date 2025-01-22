@@ -40,5 +40,28 @@ namespace TaskManagement.Controllers{
             }
            
         }
+
+
+         /// <summary>
+        /// Obtiene una lista completa de usuarios sin aplicar paginación.
+        /// </summary>
+        /// <returns>Una lista de todos los usuarios disponibles.</returns>
+        /// <response code="200">Lista de usuarios obtenida exitosamente.</response>
+        /// <response code="500">Error interno del servidor al intentar obtener los usuarios.</response> 
+        [HttpGet("findUser")]
+        public async Task<IActionResult> GetAllUsersAsync(){
+            try{
+                 var users = await service.GetAllUsersAsync();
+
+                return StatusCode(200, new {
+                    status = 200,
+                    data = users 
+                });
+            }
+            catch (ArgumentException){
+                throw new UnexpectedErrorException("Unexpected Error");
+            }
+           
+        }
     }
 }
