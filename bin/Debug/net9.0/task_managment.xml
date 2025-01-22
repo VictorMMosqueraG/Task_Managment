@@ -95,6 +95,14 @@
             <response code="200">Lista de usuarios.</response>
             <response code="401">No autorizado. Se requiere un token válido.</response>
         </member>
+        <member name="M:TaskManagement.Controllers.UserController.GetAllUsersAsync">
+            <summary>
+            Obtiene una lista completa de usuarios sin aplicar paginación.
+            </summary>
+            <returns>Una lista de todos los usuarios disponibles.</returns>
+            <response code="200">Lista de usuarios obtenida exitosamente.</response>
+            <response code="500">Error interno del servidor al intentar obtener los usuarios.</response> 
+        </member>
         <member name="T:task_managment.Migrations.InitialCreate">
             <inheritdoc />
         </member>

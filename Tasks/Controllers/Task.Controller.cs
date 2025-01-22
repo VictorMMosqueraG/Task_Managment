@@ -118,5 +118,22 @@ namespace TaskManagement.Controllers{
             }
 
         }
+
+        /// <summary>
+        /// Obtiene todas las tareas básicas sin filtros o paginación.
+        /// </summary>
+        /// <returns>Una lista de tareas básicas.</returns>
+        /// <response code="200">Lista de tareas básicas.</response>
+        /// <response code="401">No autorizado. Se requiere un token válido.</response>
+        [HttpGet("findTask")]
+        public async Task<IActionResult> findAllBase(){
+            try{
+                var foundTask = await taskService.findAllBase();
+                return Ok(foundTask);   
+            }
+            catch (ArgumentException){
+                throw new UnexpectedErrorException("Unexpected Error");
+            }
+        }
     }
 }
